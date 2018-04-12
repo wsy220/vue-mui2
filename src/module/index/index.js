@@ -6,7 +6,7 @@ new Vue({
   el: '#app',
   template: '<App/>',
   components: {App},
-  mounted: function () {
+ mounted: function () {
     var main, menu;//mask = mui.createMask(_closeMenu);
     var showMenu = false, mode = 'main-move';
     //mui初始化
@@ -73,14 +73,14 @@ new Vue({
         var temp = {};
         temp[targetTab] = "true";
         mui.extend(aniShow, temp);
-        plus.webview.show(targetTab, "fade-in", 300);
-      }
-      //隐藏当前;
-      plus.webview.hide(activeTab);
-      //更改当前活跃的选项卡
-      activeTab = targetTab;
-    });
+          plus.webview.show(targetTab, "fade-in", 300);
+        }
+        //隐藏当前;
+        plus.webview.hide(activeTab);
+        //更改当前活跃的选项卡
+        activeTab = targetTab;
+      });
 
-  }
+    }
 
 })

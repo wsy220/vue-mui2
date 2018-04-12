@@ -1,5 +1,8 @@
 <template>
-  <nav class="mui-bar mui-bar-tab">
+
+  <div id="app">
+    <img src="./images/logo.png">
+    <nav class="mui-bar mui-bar-tab">
     <a id="defaultTab" class="mui-tab-item mui-active" href="home.html">
       <span class="mui-icon"><i class="iconfont icon-icon-test"></i></span>
       <span class="mui-tab-label">首页</span>
@@ -21,6 +24,9 @@
       <span class="mui-tab-label">我的</span>
     </a>
   </nav>
+  </div>
+
+
 </template>
 
 <script>
@@ -31,6 +37,13 @@
 <style>
   /*@import '../../../static/mui/mui.css';*/
   /*@import '../../../static/mui/cus.mui.css';*/
-
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 
 </style>

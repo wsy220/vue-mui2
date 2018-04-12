@@ -9,28 +9,28 @@
     <div class="mui-content">
       <div class="anniu">
         <div class="lefttop1" id="item1_huli">
-          <span class="mui-icon"><img :src="logo"></span>
+          <span class="mui-icon"><img src="./images/logo.png"></span>
           <div class="mui-media-body">上门护理{{msg}}</div>
         </div>
         <div class="center1">
-          <span class="mui-icon"><img src="/static/img/index_img/mainxiaoqi.gif"></span>
+          <span class="mui-icon"><img src="./images/logo.png"></span>
           <div class="mui-media-body"></div>
         </div>
         <div class="righttop1" id="wode_healthness">
-          <span class="mui-icon"><img src="/static/img/index_img/index_img/main_button3.png"></span>
+          <span class="mui-icon"><img src="./images/logo.png"></span>
           <!--<div class="mui-media-body">我的化验单</div>-->
           <div class="mui-media-body">健康数据</div>
         </div>
-        <div class="center2" id="item2_zonghe"><span class="mui-icon"><img src="../../styles/images/index_img/main_button5.png"></span>
+        <div class="center2" id="item2_zonghe"><span class="mui-icon"><img src="./images/logo.png"></span>
           <div class="mui-media-body">综合服务</div>
         </div>
-        <div class="center3" id="report_online"><span class="mui-icon"><img src="../../styles/images/index_img/main_button7.png"></span>
+        <div class="center3" id="report_online"><span class="mui-icon"><img src="./images/logo.png"></span>
           <div class="mui-media-body">报告解读</div>
         </div>
-        <div class="lefttop2" id="item1_kangfu"><span class="mui-icon"><img src="../../styles/images/index_img/main_button6.png"></span>
+        <div class="lefttop2" id="item1_kangfu"><span class="mui-icon"><img src="./images/logo.png"></span>
           <div class="mui-media-body">上门康复</div>
         </div>
-        <div class="righttop2" id="familydoctor"><span class="mui-icon"><img src="../../styles/images/index_img/main_button4.png"></span>
+        <div class="righttop2" id="familydoctor"><span class="mui-icon"><img src="./images/logo.png"></span>
           <!--<div class="mui-media-body">我的健康</div>-->
           <div class="mui-media-body">家庭医生</div>
         </div>

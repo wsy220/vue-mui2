@@ -8,10 +8,5 @@ new Vue({
   components: { HomePage }
 
 })
-Vue.component('HomePage',{
-  data: {
-    logo: '/static/images/index_img/smhl.png',
-    message:"Vue test"
-  }
-})
+
 
