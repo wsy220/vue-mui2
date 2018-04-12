@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>资讯</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+				border: 0;
+				margin-top: 8px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 42px;
+				max-width: 130px;
+				height: 100px;
+			}
+			
+			.doctor {
+				color: #d98502;
+				font-size: 12px;
+			}
+			
+			.mui-ellipsis {
+				overflow: hidden;
+				white-space: normal;
+				text-overflow: ellipsis;
+			}
+			
+			.mui-media-body p img {
+				line-height: 42px;
+				max-width: 130px;
+				max-height: 100px;
+				margin-right: 10px;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper {
+				height: 55px;
+			}
+			
+			.mui-fullscreen .mui-segmented-control~.mui-slider-group {
+				top: 50px;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+				padding: 10px 10px;
+				width: 19.5%;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+				width: 100%;
+				height: 40px;
+				white-space: nowrap;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				color: #40ccd2;
+				font-weight: bold;
+				font-size: 15px;
+			}
+			
+			.mui-segmented-control {
+				font-size: 12px;
+				font-weight: 400;
+				position: relative;
+				display: table;
+				overflow: hidden;
+				width: 100%;
+				table-layout: fixed;
+				border: 1px solid #007aff;
+				border-radius: 3px;
+				background-color: transparent;
+				-webkit-touch-callout: none;
+			}
+			
+			.tableUL {
+				background: #FFFFFF;
+				margin-top: 0.1rem;
+			}
+			
+			.mui-table-view {
+				background-color: #eee;
+				min-height: 500px;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item .mui-table-view:after,
+			.mui-slider .mui-slider-group .mui-slider-item .mui-table-view:before {
+				height: 1px;
+			}
+			
+			#tableUL:after {
+				display: none;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item .mui-table-view:before {
+				display: none;
+			}
+			
+			.wutu {
+				text-align: center;
+				padding-top: 1.8rem;
+				background: transparent;
+			}
+			
+			.mui-content-padded {
+				background-color: transparent;
+			}
+			
+			.mui-ellipsis-2 {
+				display: -webkit-box;
+				overflow: hidden;
+				white-space: normal!important;
+				text-overflow: ellipsis;
+				word-wrap: break-word;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				font-size: ;
+			}
+			
+			.mui-ellipsis-3 {
+				overflow: hidden;
+				white-space: normal;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+			}
+			
+			.mui-media {
+				background: #FFFFFF;
+			}
+			
+			.mui-table-view-cell {
+				margin-bottom: 0.05rem;
+			}
+			
+			.wenzi_time {
+				position: absolute;
+			}
+			
+			.wutu {
+				text-align: center;
+				padding-top: 1.8rem;
+				background: transparent;
+			}
+			
+			.imgwenzhang {
+				border: 1px solid #e5e5e5;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="uptab">
+						<a class="mui-control-item" href="#item1mobile">
+							暂无网络
+						</a>
+						<a class="mui-control-item" href="#item2mobile">
+
+						</a>
+						<a class="mui-control-item" href="#item3mobile">
+
+						</a>
+						<a class="mui-control-item" href="#item4mobile">
+
+						</a>
+						<a class="mui-control-item" href="#item5mobile">
+
+						</a>
+						<a class="mui-control-item" href="#item6mobile">
+
+						</a>
+						<a class="mui-control-item" href="#item5mobile">
+
+						</a>
+						<a class="mui-control-item" href="#item6mobile">
+
+						</a>
+					</div>
+				</div>
+				<ul class="mui-table-view" id="backImG">
+				</ul>
+				<div class="mui-slider-group" id="slider_group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id="tableUL">
+									<div class="wutu"><img src="../images/no_data/1-01.png" style="width: 150px;"></div>
+
+									<!--<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '">
+										<a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload" src=" ' + serverAddress + data[i].cover + '" data-lazyload="' + serverAddress + data[i].cover + '">
+											<div class="mui-media-body" style="padding-left:10px;">
+												<div class="mui-row"><span class="">' + data[i].articletitle + '</span></div>
+												<div style="position: absolute;bottom: 30px;">
+												<p class=""><span class="doctor">' + data[i].articleauthor + ' </span></p>
+												<p class="wenzi_time">' + getDate(data[i].createdOn) + '</p>
+												</div>
+											</div>
+										</a>
+									</li>-->
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="wutu"><img src="../images/no_data/1-02.png" style="width: 150px;"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="wutu"><img src="../images/no_data/1-02.png" style="width: 150px;"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="wutu"><img src="../images/no_data/1-02.png" style="width: 150px;"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item5mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="wutu"><img src="../images/no_data/1-02.png" style="width: 150px;"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item6mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="wutu"><img src="../images/no_data/1-02.png" style="width: 150px;"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script src="../js/mui.min.js"></script>
+			<script src="../js/mui.pullToRefresh.js"></script>
+			<script src="../js/mui.pullToRefresh.material.js"></script>
+			<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+			<script type="text/javascript" src="../js/constants.js"></script>
+			<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+			<script type="text/javascript" src="../js/arttmpl.js"></script>
+			<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+			<script type="text/javascript" src="../js/json_time.js"></script>
+			<script type="text/javascript" src="../js/qs/qs.feedback.js"></script>
+			<script type="text/javascript" src="../js/qs/md5/md5.min.js"></script>
+
+			<script>
+				var page = 1,
+					limit = 5;
+				mui.plusReady(function() {
+
+					function wainshow(self) {
+						if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE) {
+							self.endPullDownToRefresh();
+							mui.toast("确认手机是否连接网络！");
+						}
+					}
+
+					(function(muip) {
+						//阻尼系数
+						var deceleration = mui.os.ios ? 0.003 : 0.0009;
+						muip('.mui-scroll-wrapper').scroll({
+							bounce: false,
+							indicators: true, //是否显示滚动条
+							deceleration: deceleration
+						});
+						//禁止上TAB左右滑动
+						muip('.mui-slider').slider().setStopped(true);
+						muip.ready(function() {
+							var url = serverAddress + "/api/articletype/list";
+							var htmls = '';
+							var htmls2 = '';
+							var success = function(data) {
+								if(data.length != 0) {
+									var datalength;
+									if(data.length < 5) {
+										datalength = data.length;
+									} else if(data.length > 5) {
+										datalength = 5
+									}
+									for(var i = 0; i < datalength; i++) {
+										if(i == 0) {
+											htmls += '<a class="mui-control-item mui-active" href="#item' + (i + 1) + 'mobile" id="' + data[i]._id + '">' + data[i].typename + '</a>'
+										} else {
+											htmls += '<a class="mui-control-item" href="#item' + (i + 1) + 'mobile" id="' + data[i]._id + '">' + data[i].typename + '</a>'
+										}
+										document.getElementById("uptab").innerHTML = htmls;
+
+										htmls2 += '<div id="#item' + (i + 1) + 'mobile" class="mui-slider-item mui-control-content"><div class="mui-scroll-wrapper"><div class="mui-scroll"><ul class="mui-table-view" id="tableUL"></ul></div></div></div>';
+										document.getElementById("slider_group").innerHTML = htmls2;
+									}
+									firsttab = data[0]._id;
+									var url = serverAddress + "/api/article/applist/" + firsttab + "?page=" + page + "&limit=" + limit;
+									var success = function(data) {
+										var htmls = '';
+										console.log("咨询列表初始" + JSON.stringify(data));
+										if(data.length == 0) {
+											htmls = '<div class="mui-content-padded wutu"><img src="../images/no_data/1-01.png" style="width: 150px;"></div>'
+											document.getElementById("tableUL").innerHTML = htmls;
+											$(".mui-table-view").css("background-color", "transparent");
+											$("ul").css({
+												"background-color": "transparent",
+												"font-size": "200%"
+											});
+										} else {
+											for(var i = 0; i < data.length; i++) {
+
+												if(data[i].publishType == "web") {
+
+													htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang"  src=" ' + serverAddress + data[i].cover + '" data-lazyload="' + serverAddress + data[i].cover + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articleauthor + ' </span></p><p class="wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+
+												} else if(data[i].publishType == "dcapp") {
+													//var path = serverAddress + "/" + data[i].imgList[0].split("client\\")[1];
+													//htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].split("client\\")[1] + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+													if(data[i].imgList[0].indexOf("client\\") < 0) {
+														var path = serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "\\");
+														htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "\\") + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+													} else if(data[i].imgList[0].indexOf("client/") < 0) {
+														var path = serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "/");
+														htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "/") + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+													}
+												}
+												document.getElementById("tableUL").innerHTML = htmls;
+											}
+											page++;
+										}
+										$(".qs-img-lazyload").each(function(i, v) {
+											$$.lazyload(v)
+										})
+									};
+									if(firsttab != "") {
+										commonHttpUtils(url, "get", {}, success, error, false);
+									}
+								}
+							};
+							commonHttpUtils(url, "post", {}, success, error, false);
+
+							//循环初始化所有下拉刷新，上拉加载。
+							muip.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+								muip(pullRefreshEl).pullToRefresh({
+									down: {
+										callback: function() {
+											var self = this;
+											setTimeout(function() {
+												document.addEventListener("netchange", wainshow(self), false);
+												var ul = self.element.querySelector('.mui-table-view');
+												createFragment(ul, index, 5, true, self, firsttab, "down");
+												self.endPullDownToRefresh();
+											}, 1000);
+										}
+									},
+									up: {
+										callback: function() {
+											var self = this;
+											setTimeout(function() {
+												var ul = self.element.querySelector('.mui-table-view');
+												createFragment(ul, index, 5, true, self, firsttab, "up");
+												self.endPullUpToRefresh();
+											}, 1000);
+										}
+									}
+								});
+							});
+							var createFragment = function(ul, index, count, reverse, self, itemid, type) {
+								var url = serverAddress + "/api/article/applist/" + itemid + "?page=" + page + "&limit=" + count;
+								if(page == 0) {
+									return false;
+								}
+								var success = function(data) {
+									console.log("咨询列表下拉" + JSON.stringify(data));
+									if(data.length == 0) {
+										page = 0;
+										self.endPullUpToRefresh();
+										return false;
+									} else {
+										var htmlcreate = '';
+										for(var i = 0; i < data.length; i++) {
+											if(data[i].publishType == "web") {
+												htmlcreate += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + data[i].cover + '" data-lazyload="' + serverAddress + data[i].cover + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articleauthor + ' </span></p><p class="wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+
+											} else if(data[i].publishType == "dcapp") {
+												//var path = serverAddress + "/" + data[i].imgList[0].split("client\\")[1];
+												//htmlcreate += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].split("client\\")[1] + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+
+												if(data[i].imgList[0].indexOf("client\\") < 0) {
+													var path = serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "\\");
+													htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "\\") + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+												} else if(data[i].imgList[0].indexOf("client/") < 0) {
+													var path = serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "/");
+													htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "/") + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+												}
+
+											}
+										}
+										if(type == "down") {
+											$("#tableUL").prepend(htmlcreate);
+										} else if(type == "up") {
+											$("#tableUL").append(htmlcreate);
+										}
+										page++;
+									}
+								};
+								commonHttpUtils(url, "get", {}, success, error, false);
+							};
+
+							//点击类别查询相关列表
+							mui("#uptab").on("tap", "a", function(e) {
+								page = 2;
+								firsttab = this.id;
+								var url = serverAddress + "/api/article/applist/" + this.id;
+								var htmls = '';
+								var success = function(data) {
+									console.log("咨询列表初始a" + JSON.stringify(data));
+									if(data.length == 0) {
+										htmls = '<div class="mui-content-padded wutu"><img src="../images/no_data/1-01.png" style="width: 150px;"></div>'
+										document.getElementById("tableUL").innerHTML = htmls;
+										$(".mui-table-view").css("background-color", "transparent");
+										$(".mui-slider .mui-slider-group .mui-slider-item .mui-table-view:before").css("display", "none");
+									} else {
+										for(var i = 0; i < data.length; i++) {
+											if(data[i].publishType == "web") {
+
+												//htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left" src=" ' + serverAddress + data[i].cover + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><div class="mui-col-sm-4 mui-col-xs-4"><span class="mui-ellipsis-2">' + data[i].articletitle + '</span></div><div class="mui-col-sm-8 mui-col-xs-8"><span class="doctor mui-pull-right">' + data[i].articleauthor + '</span></div></div><p class="mui-ellipsis-3">' + data[i].introduction + '</p><p class="mui-pull-right wenzi_time">' + getDate(data[i].createdOn) + '</p></div></a></li>';
+												htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang"  src=" ' + serverAddress + data[i].cover + '" data-lazyload="' + serverAddress + data[i].cover + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articleauthor + ' </span></p><p class="wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+
+											} else if(data[i].publishType == "dcapp") {
+												if(data[i].articledc != null) {
+													//alert("1"+data[i].imgList[0].indexOf("client\\") < 0);
+													//alert("2"+data[i].imgList[0].indexOf("client/")<0);
+													if(data[i].imgList[0].indexOf("client\\") < 0) {
+														var path = serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "\\");
+														htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "\\") + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+													} else if(data[i].imgList[0].indexOf("client/") < 0) {
+														var path = serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "/");
+														htmls += '<li class="mui-table-view-cell mui-media" id="' + data[i]._id + '"><a href="javascript:;"> <img class="mui-media-object mui-pull-left qs-img-lazyload imgwenzhang" src=" ' + serverAddress + "/" + data[i].imgList[0].replace('client', '').replace(/\\/g, "/") + '" data-lazyload="' + path + '"><div class="mui-media-body" style="padding-left:10px;"><div class="mui-row"><span class="">' + data[i].articletitle + '</span></div><div style="position: absolute;bottom: 30px;"><p class=""><span class="doctor">' + data[i].articledc.nickname + ' </span></p><p class=" wenzi_time">' + getDate(data[i].createdOn) + '</p></div></div></a></li>';
+													}
+												}
+											}
+											document.getElementById("tableUL").innerHTML = htmls;
+										}
+									}
+								};
+								if(this.id != "") {
+									commonHttpUtils(url, "get", {}, success, error, true);
+								}
+							});
+							//查看咨询详情
+							mui(".mui-table-view").on('tap', '.mui-table-view-cell', function() {
+								//获取id
+								var id = this.getAttribute("id");
+								mui.openWindow({
+									id: 'message_xiangqing.html',
+									url: '../main_sub/message_xiangqing.html',
+									show: {
+										autoShow: false, //页面loaded事件发生后自动显示，默认为true
+										event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+									},
+									waiting: {
+										autoShow: true //自动显示等待框，默认为true
+									},
+									extras: {
+										ARTICLEID: id
+									}
+								});
+							})
+						});
+					})(mui);
+				});
+				//				[{
+				//					"wzfl": "jyfx",
+				//					"paSeeFlag": true,
+				//					"imgList": ["client/assets/uploads/single-file-1523151488308.png"],
+				//					"status": "0",
+				//					"topsettingFlag": 0,
+				//					"createdOn": "2018-04-08T01:38:09.657Z",
+				//					"updatedOn": "2018-04-08T02:48:06.333Z",
+				//					"_id": "5ac97281bb5c0311851d3e1b",
+				//					"articledc": {
+				//						"nickname": "龙嘉",
+				//						"_id": "5a02b232dc3a041a62aebcac"
+				//					},
+				//					"articletitle": "666",
+				//					"articlecontent": "家里冷可口可JJ可口可乐了了家里冷可口可JJ可口可乐了了家里冷可口可JJ可口可乐了了JJ家里冷可口可JJ可口可乐了JJJJ可口可乐了",
+				//					"realNameFlag": true,
+				//					"articleauthor": "6699",
+				//					"publishType": "dcapp",
+				//					"articletype": {
+				//						"typename": "问药"
+				//					},
+				//					"__v": 0
+				//				}, {
+				//					"wzfl": "jyfx",
+				//					"paSeeFlag": true,
+				//					"imgList": [],
+				//					"status": "0",
+				//					"topsettingFlag": 0,
+				//					"createdOn": "2018-02-01T06:02:19.242Z",
+				//					"updatedOn": "2018-02-08T08:16:33.853Z",
+				//					"_id": "5a72ad6ba618412d03f4b76d",
+				//					"articletype": {
+				//						"typename": "问药"
+				//					},
+				//					"articlecontent": "<p>&nbsp; &nbsp; &nbsp; &nbsp;不宜只服上清液</p>\n\n<p>　　每味中<a href=\"http://ypk.39.net/yaopin/zc/fuke/a3932.html\" target=\"_blank\">药都</a>含有多种化学成分，中药复方的汤剂化学成分就更复杂了，有些成分（包括部分脂溶性成分）在加热时溶于水，但是冷却后又析出沉淀；有些成分相互作用形成复合物，在加热时能溶于水，冷却时则逐渐沉淀析出；有些成分经水解、氧化、聚合等化学作用，逐渐变成不溶物析出；还有胶态成分或混悬微粒，经凝聚后也能产生较多的沉淀。所以，汤剂在服用时应振摇均匀服用，且勿只服上清液。</p>\n\n<p>　　不宜过夜服用</p>\n\n<p>　　一般情况下，汤剂宜随煎随服，应趁<a href=\"http://jbk.39.net/keshi/zxy/zhongyi/bca5c.html\" target=\"_blank\">温热</a>时先服一半，过4～6小时再服一半。汤剂煎好后，若长时间放置，对药性是有影响的。</p>\n\n<p>　　有些人煎煮中药，喜欢把药液分成几次吃，当天服不完，就留到次日服，这样做是不好的。中药里含有<a href=\"http://ypk.39.net/yaopin/zyypjylqj/zyfy/aef25.html\" target=\"_blank\">淀粉</a>、糖类、蛋白质、<a href=\"http://jck.39.net/3/jianchazuhe/70/d9bc6.html\" target=\"_blank\">维生素</a>、挥发油、氨基酸和各种酶、<a href=\"http://ypk.39.net/yaopin/7bc41.html\" target=\"_blank\">微量元素</a>等多种成分，煎煮时这些成分大部分溶解在汤药汁里。如果过夜服用或存放过久，不但药效降低，而且会因空气、温度、时间和细菌污染等因素的影响，使药液中的酶分解减效，细菌繁殖滋生，淀粉、糖类等成分发酵水解，以致药液发馊变质，服用后对人体健康不利。</p>\n\n<p>　　机器煎煮的汤剂由于密闭包（分）装，还是可以过夜服用的。</p>\n\n<p>　　不宜加糖服用</p>\n\n<p>&nbsp; &nbsp; &nbsp; &nbsp; 糖作为一种甜味物质，指的是人们经常食用的白糖、红糖和冰糖。中药有寒、热、温、凉四气和辛、甘、酸、苦、咸五味。其中，辛能散，甘能缓，酸能收，苦能涩，咸能入肾，也就是说不同性味的中药具有不同的药效。一些人在服中药时，常因汤剂苦口难以下咽，服用时总少不了加些糖来降低苦味。其实，加糖后的药剂在降低了苦味的同时也降低了药效。这是因为：1.蔗糖属于温性，掺入寒性中药会缓解其寒凉之性，能降低某些退热药的药效，干扰人体对矿物质和维生素的吸收，且有利尿作用。2.某些药物就是借助于苦味或其他刺激而起作用的（苦能健胃）。如某些健胃药就是靠其苦味刺激消化腺，促进消化液分泌而达到治疗目的的。3.糖可解除某些药物的有效成分，如糖可解除极苦的中药马钱子的部分药效。4.某些病人不宜吃糖，如<a href=\"http://jbk.39.net/tnb/\" target=\"_blank\">糖尿病</a>、<a href=\"http://jbk.39.net/gxy/\" target=\"_blank\">高血压</a>、<a href=\"http://jbk.39.net/zfg/\" target=\"_blank\">脂肪肝</a>、化脓性疾病的病人等。因此，不管是服中药还是西药，都不能因其味苦而随意加糖。</p>\n\n<p>　　那么如何减轻汤剂苦味呢？一要控制温度。资料显示，当药汤温度处于37℃时，味感最苦，降至37℃以下再服，苦味便会减轻。二要注意位置和喝药速度。舌头<a href=\"http://jbk.39.net/gm/\" target=\"_blank\">上感</a>受苦味的味蕾集中在舌根，因此喝药时应尽量避免舌根过多地或过长时间地接触药液。三是喝完汤药后要立刻用凉水漱口。</p>\n\n<p>　　不过红糖作为药引，在治疗产后恶露不尽、行经腹痛、体虚畏寒等妇科<a href=\"http://zzk.39.net/zz/quanshen/aa3ca.html\" target=\"_blank\">血虚</a>、血寒诸症时不但能改变药物异味，还可增强疗效。</p>\n",
+				//					"introduction": "红糖和冰糖。中药有寒、热、温、凉四气和辛、甘、酸、苦、咸五味。其中，辛能散，甘能缓，酸能收，苦能涩，咸能入肾",
+				//					"articletitle": "中药汤剂服用三不宜",
+				//					"articleauthor": "39健康网",
+				//					"publishType": "web",
+				//					"__v": 0,
+				//					"cover": "/assets/uploads/single-file-1518077765143.jpg"
+				//				}, {
+				//					"wzfl": "jyfx",
+				//					"paSeeFlag": true,
+				//					"imgList": [],
+				//					"status": "0",
+				//					"topsettingFlag": 0,
+				//					"createdOn": "2018-02-01T03:04:36.942Z",
+				//					"updatedOn": "2018-02-09T00:55:28.319Z",
+				//					"_id": "5a7283c4a618412d03f4b76c",
+				//					"articletype": {
+				//						"typename": "问药"
+				//					},
+				//					"articlecontent": "<p>&nbsp; &nbsp; &nbsp; 河南朱先生提供：入夏以来，我睡觉总是容易多梦，感觉一晚上都睡不踏实，第二天疲惫不堪。由于担心吃安眠药会有副作用，最近从网上查到下面这个安眠的偏方：当归、生地、<a href=\"http://fitness.39.net/food/709.html\" target=\"_blank\">红花</a>、牛膝各15克，枳壳、赤芍、甘草各10克，<a href=\"http://fitness.39.net/food/2206.html\" target=\"_blank\">桔梗</a>、川芎各7克，<a href=\"http://fitness.39.net/food/719.html\" target=\"_blank\">桃仁</a>20克，煎服。想请专家点评一下有无道理。</p>\n\n<p>　　<a href=\"http://yyk.39.net/nj/zonghe/1eefc.html\" target=\"_blank\">南京市中西医结合医院</a>中医失眠诊疗门诊副主任中医师夏公旭点评：这个方子中大多是活血的中药，如当归、红花、赤芍、川芎、桃仁等，也有理气行气的中药，比如桔梗、枳壳等，所以如果是气滞血瘀导致的失眠多梦可以在中医师的指导下加减药物服用。</p>\n\n<p>&nbsp; &nbsp; &nbsp;要提醒大家的是，失眠多梦还有其他多种证型。比如心气不足证型的失眠，患者往往多梦易惊、神疲困倦、气短，或喜悲善哭、精神恍惚，治疗上需要养血益气、宁心安神；心血不足证型的失眠患者，主要症状为<a href=\"http://zzk.39.net/zz/xiongbu/50027.html\" target=\"_blank\">心悸</a><a href=\"http://jbk.39.net/keshi/zxy/zhongyi/bc607.html\" target=\"_blank\">怔忡</a>、心烦、多梦易惊、<a href=\"http://zzk.39.net/zz/toubu/tou/a6b84.html\" target=\"_blank\">健忘</a>头晕、面色不华，治疗上要以养血安神为主；心阴不足导致的失眠，一般主要症状是五心烦热、咽干舌燥、舌红少津，治疗上需要养阴补心安神。如果患者自己不能辨别，最好及时就医请医生辨证施治。</p>\n\n<p>　　此外，轻度失眠患者可以利用饮食改善症状。比如睡前喝杯<a href=\"http://jbk.39.net/keshi/zxy/zhongyi/bca5c.html\" target=\"_blank\">温热</a>的牛奶。牛奶中的<a href=\"http://ypk.39.net/yaopin/d24c5.html\" target=\"_blank\">色氨酸</a>是人体8种必需氨基酸之一，它能抑制大脑兴奋，具有<a href=\"http://jbk.39.net/keshi/jijiu/4e354.html\" target=\"_blank\">镇静</a>作用，有助失眠患者产生睡意。1杯牛奶中的色氨酸含量足够起到安眠的作用，可以使人较快进入梦乡。</p>\n",
+				//					"articletitle": "药茶安眠靠谱吗",
+				//					"introduction": "轻度失眠患者可以利用饮食改善症状。比如睡前喝杯温热的牛奶。牛奶中的色氨酸是人体8种必需氨基酸之一，它能抑制大脑兴奋���具有镇静作用，有助失眠患者产生睡意。1杯牛奶中的色氨酸含量足够起到安眠的作用，可以使人较快进入梦乡。",
+				//					"cover": "/assets/uploads/single-file-1518137726112.jpg",
+				//					"articleauthor": "39健康网",
+				//					"publishType": "web",
+				//					"__v": 0
+				//				}, {
+				//					"wzfl": "jyfx",
+				//					"paSeeFlag": true,
+				//					"imgList": [],
+				//					"status": "0",
+				//					"topsettingFlag": 0,
+				//					"createdOn": "2018-02-01T02:56:15.729Z",
+				//					"updatedOn": "2018-02-01T02:56:15.729Z",
+				//					"_id": "5a7281cfa618412d03f4b76a",
+				//					"articletype": {
+				//						"typename": "问药"
+				//					},
+				//					"articletitle": "灵芝可调节肠道菌群改善肥胖",
+				//					"articleauthor": "39健康网",
+				//					"articlecontent": "<p>&nbsp; &nbsp; &nbsp; 近日，来自台湾长庚大学的研究人员在国际学术期刊nature communication在线发表了一项最新研究进展，他们通过<a href=\"http://jck.39.net/jiancha/huaxue/myx/d9d62.html\" target=\"_blank\">动物实验</a>首次发现<a href=\"http://ypk.39.net/zcy/buxuyao/7ea42.html\" target=\"_blank\">灵芝</a>能够调节小鼠肠道菌群生态，改善肥胖。</p>\n\n<p>　　肥胖已经逐渐成为全球性的公共健康问题，目前全世界大约有5亿肥胖的人和14亿体重超重的人。肥胖会促进许多并发症的发生，如<a href=\"http://jbk.39.net/tnb/\" target=\"_blank\">糖尿病</a>，心血管疾病，<a href=\"http://jbk.39.net/gxy/\" target=\"_blank\">高血压</a>和癌症，肥胖的发生主要是由于机体能量失衡所导致，能量摄入增加同时运动量减少是导致肥胖发生的主要原因。许多研究已经证明肥胖的发生常伴随慢性低度炎症以及肠道菌群生态紊乱，因此如何改善炎症，恢复肠道生态平衡成为肥胖研究的重要课题。</p>\n\n<p>　　在这项研究中，研究人员从一种名贵中药--赤芝中提取出一种水提取物（WEGL），将其添加到高脂饮食诱导的肥胖小鼠食物中。赤芝是灵芝的一种，也是传统中医学中使用的一种中药材，在亚洲中药材中已经被使用了几个世纪，用于提高健康水平，同时也有研究推测其具有抗糖尿病效应。研究人员在对高脂诱导的肥胖小鼠进行了该药物处理之后发现这些肥胖小鼠表现出体重下降，炎症改善，<a href=\"http://ypk.39.net/yaopin/ce24c.html\" target=\"_blank\">胰岛素</a>敏感性增加等获益表型，并且这些小鼠的肠道菌群生态紊乱也得到了逆转，除此之外，小肠屏障的完整度得以维持，还降低了代谢性内毒素<a href=\"http://jbk.39.net/xz3/\" target=\"_blank\">血症</a>的水平。</p>\n\n<p>&nbsp; &nbsp; &nbsp; 研究人员还通过粪便移植的方法将WEGL处理的小鼠的粪便转移到高脂饮食诱导的肥胖小鼠，也表现出抗肥胖，调节肠道菌群的作用。</p>\n\n<p>　　总得来说，这项研究首次发现灵芝有降低体重调节肠道生态平衡的作用，这表明灵芝补品对于<a href=\"http://jbk.39.net/fpz/\" target=\"_blank\">肥胖症</a>和相关疾病的治疗也许会有用，但还需要进一步研究证明在人身上是否也有类似效应。</p>\n",
+				//					"introduction": "赤芝是灵芝的一种，也是传统中医学中使用的一种中药材，在亚洲中药材中已经被使用了几个世纪，用于提高健康水平，同时也有研究推测其具有抗糖尿病效应。",
+				//					"cover": "/assets/uploads/single-file-1517453747485.jpg",
+				//					"publishType": "web",
+				//					"__v": 0
+				//				}, {
+				//					"wzfl": "jyfx",
+				//					"paSeeFlag": true,
+				//					"imgList": [],
+				//					"status": "0",
+				//					"topsettingFlag": 0,
+				//					"createdOn": "2018-02-01T02:50:51.792Z",
+				//					"updatedOn": "2018-02-01T02:50:51.792Z",
+				//					"_id": "5a72808ba618412d03f4b768",
+				//					"articletype": {
+				//						"typename": "问药"
+				//					},
+				//					"articlecontent": "<p>&nbsp; &nbsp; 　阿胶，补血滋阴，润燥止血，新年快到了，阿胶成为市面上不可或缺的送礼佳品，主要是阿胶礼盒，还有一些阿胶制品。阿胶美容养颜，但是，是谁都可以吃，适合吃吗？</p>\n\n<p>　　阿胶是驴皮煎煮浓缩后的固体动物胶。其主要成分是蛋白质。在中医学里，阿胶是滋阴补血、安胎、治疗经产病的妇科良药，已有2500年的制作用药历史。阿胶在中国有着很久远的历史，距今已有两千年的生产历史，最早记载于《神农本草经》，被列为上品。</p>\n\n<p>　　阿胶的作用很多，主要是：益智健脑，缓延衰老，强筋健骨，提高免疫力，补钙等等。但是并不是人人都适合食用阿胶。</p>\n\n<p>　　那么哪些人不适合食用阿胶呢？</p>\n\n<p>　　阴虚火旺者：阴虚火旺的人吃了可能会上火。而且，新做出来的阿胶有&ldquo;火毒&rdquo;，不适合服用，一般要在阴凉干燥处静置三年，使其成为&ldquo;一拍即碎&rdquo;的陈阿胶后再服用。</p>\n\n<p>　　女性正值经期：经期服用用阿胶容易造成月经量过多或紊乱，要等经期结束后在服用。</p>\n\n<p>　　脾虚者：消化功能低下的人，服用阿胶时最好配以调理脾胃的药，促进阿胶的消化吸收。</p>\n\n<p>　　感冒患者：感冒患者需要等病情痊愈后再继续服用。</p>\n\n<p>　　消化不良者：因阿胶滋腻会妨碍脾胃消化功能，因此有胃部胀满、消化不良的体质，应慎用阿胶。此外，食用阿胶还有一些饮食上的禁忌。像生冷食物、浓茶、萝卜等在食用阿胶期间，最好避免，不要同时服用。</p>\n\n<p>　　阿胶虽好，但并不是&ldquo;万能补药&rdquo;，选择阿胶作为礼品之前，要先了解对方身体状况再做决定哦！以免适得其反，就不好啦！</p>\n",
+				//					"introduction": "阿胶是驴皮煎煮浓缩后的固体动物胶。其主要成分是蛋白质。在中医学里，阿胶是滋阴补血、安胎、治疗经产病的妇科良药，已有2500年的制作用药历史。阿胶在中国有着很久远的历史，距今已有两千年的生产历史，最早记载于《神农本草经》，被列为上品。",
+				//					"articletitle": "阿胶不是想吃就能吃",
+				//					"articleauthor": "39健康网",
+				//					"cover": "/assets/uploads/single-file-1517453436671.jpg",
+				//					"publishType": "web",
+				//					"__v": 0
+				//				}]
+			</script>
+	</body>
+
+</html>

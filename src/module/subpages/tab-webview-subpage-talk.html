@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../js/qs/qs.common.css" />
+		<style>
+			.mui-table-view {
+				background-color: #EEEEEE;
+			}
+			
+			.mui-table-view:before {
+				height: 0;
+			}
+			
+			.imgmsg {
+				max-width: 45%;
+				margin: 0 auto;
+				display: table;
+				padding-top: 50px;
+			}
+			
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.read-color {
+				color: #8f8f94;
+			}
+			
+			.mui-badge {
+				padding: 5px 5px;
+				margin-left: -15px;
+				font-size: 10px;
+				line-height: 1.4;
+				position: absolute;
+				top: 10px;
+				left: 60px;
+				background: red;
+				border-radius: 50px;
+			}
+			
+			.cus-badge-box {
+				position: relative;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+				margin-right: -70px;
+			}
+			
+			.cus-time {
+				margin-right: 10px;
+				font-size: 12px;
+				float: right;
+				color: #8f8f94;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				padding: 12px 20px;
+				background-color: #fff;
+			}
+			
+			.cus-title {
+				color: #353535;
+				line-height: 24px;
+			}
+			
+			.mui-ellipsis-10 {
+				display: -webkit-box;
+				overflow: hidden;
+				white-space: normal!important;
+				text-overflow: ellipsis;
+				word-wrap: break-word;
+				-webkit-line-clamp: 10;
+				-webkit-box-orient: vertical;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				right: 10px;
+				content: '\e583';
+			}
+			
+			.doctor {
+				font-size: 12px;
+			}
+			
+			.mui-ellipsis-3 {
+				overflow: hidden;
+				white-space: normal;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				/*-webkit-line-clamp: 3;*/
+				-webkit-box-orient: vertical;
+			}
+			
+			.inchat {
+				position: absolute;
+				top: 0;
+				z-index: 999;
+				width: 100%;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.wrapper {
+				top: 75px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content inchat">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="" id="chat">
+						<span><img class="mui-media-object mui-pull-left" type="" src="../images/xtxx.png" ><span class="mui-badge" id="red_dian"></span></span>
+						<div class="mui-media-body">
+							<span class="ziti">聊天列表</span>
+							<!--<span class="doctor mui-pull-right">ddd</span>
+							<p class="mui-ellipsis-3">ddd</p>-->
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div id="refreshContainer" class="mui-content">
+			<div id="wrapper01" class="wrapper" style="bottom: 2px;">
+				<ul id="scroller" class="scroller" style="margin: 0; padding: 0;">
+					<ul class="mui-table-view mui-table-view-chevron" id="messageUL"></ul>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="../plugs/moment/moment.min.js"></script>
+	<script type="text/javascript" src="../js/art/template-web.js"></script>
+	<script type="text/javascript" src="../js/qs/qs.art.extend.js"></script>
+	<script type="text/javascript" src="../js/qs/qs.template.js"></script>
+	<script type="text/javascript" src="../js/iscroll/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../js/qs/qs.iscroll.js"></script>
+	<script type="text/javascript" src="../js/sdk/lib/jquery.json2html-master/json2html.js"></script>
+	<script type="text/javascript" src="../js/sdk/lib/jquery.json2html-master/jquery.json2html.js"></script>
+
+	<script>
+		mui.init({
+			//swipeBack: true, //启用右滑关闭功能
+		});
+		var wrapper01;
+
+		var loaded = null;
+		var initFunction = null;
+		var userId = null;
+		var notificationurl = null;
+		userId = localStorage.getItem("TOKENID");
+		var showRed = localStorage.getItem("showRed"); //显示红点与否   
+		console.log("showRed===>" + showRed);
+		if(showRed == "true") {
+			$("#red_dian").show();
+			console.log("show");
+		} else {
+			$("#red_dian").hide();
+			console.log("hide");
+		}
+		var changeRed = function() {
+			$("#red_dian").show();
+		}
+		//notificationurl = serverAddress + '/api/getnotification?id=' + userId;
+		notificationurl = serverAddress + '/api/__DoOVES70/Od676Z8998_0/P/GNTF';
+
+		console.log(notificationurl);
+
+		mui.plusReady(function() {
+			//			plus.storage.removeItem("msgFlag_unread");
+			//			plus.storage.removeItem("msgFlag");
+			var msgFlagStr_unread = JSON.parse(plus.storage.getItem('msgFlag_unread') ? plus.storage.getItem('msgFlag_unread') : "{}");
+			
+
+			function processConfimAction(myScroll) {
+				var sussess = function(data) {
+					console.log("消息列表" + JSON.stringify(data));
+					if(data.result == "success") {
+						if(myScroll.page == 1 && data.obj.length == 0) {
+							$("#messageUL").html('<p><img class="imgmsg" src="../images/no_data/1-01.png" data-preview-src="" data-preview-group="1"></p>');
+						} else if(data.obj.length != 0) {
+							if(myScroll.page == 1) {
+								$("#messageUL").html('')
+							}
+							if(data.obj.length == myScroll.limit) {
+								myScroll.page = myScroll.page + 1;
+								myScroll.upFlag = true
+							} else {
+								myScroll.upFlag = false
+							}
+
+							var msgFlagStr = plus.storage.getItem('msgFlag')
+							if(!msgFlagStr) {
+								msgFlagStr = "{}"
+							}
+							var msgFlag = JSON.parse(msgFlagStr);
+
+							//msgFlagStr_unread = JSON.parse(plus.storage.getItem('msgFlag_unread') ? plus.storage.getItem('msgFlag_unread') : "{}");
+
+							if(!msgFlagStr_unread) {
+								msgFlagStr_unread = {};
+							}
+							for(var i = 0; i < data.obj.length; i++) {
+								msgFlagStr_unread[data.obj[i]._id] = "unread";
+								comparedjson(msgFlag, msgFlagStr_unread);
+							}
+
+							plus.storage.setItem('msgFlag_unread', JSON.stringify(msgFlagStr_unread));
+
+							//console.log("后台获取未读个数"+data.sub[0].nrcount);
+							
+							if(data.sub.length!=0&&data.sub[0].nrcount == 0) {
+								var i = plus.webview.getLaunchWebview();
+								if(i) {
+									//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+									i.evalJS("changeReddian()");
+									mui.fire(i, 'refresh');
+								}
+							} else if(data.sub.length==0) {
+								var i = plus.webview.getLaunchWebview();
+								if(i) {
+									//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+									i.evalJS("changeReddian_X()");
+									mui.fire(i, 'refresh');
+								}
+							}
+
+							var phone = plus.storage.getItem("TOKEN")
+							var datestr = plus.storage.getItem(phone + "MSGTIME")
+							$("#messageUL").processTL(templateRegister.common, {
+								sub: data.obj,
+								msgFlag: msgFlag,
+								datestr: datestr
+							}, 'append', function() {
+								myScroll.refresh()
+							})
+						} else {
+							myScroll.upFlag = false
+						}
+					} else {
+						//mui.toast(data.msg);
+					}
+				};
+				commonHttpUtils2(notificationurl + "?page=" + myScroll.page + "&limit=" + myScroll.limit, "get", "", sussess, error);
+			}
+
+			var init = function() {
+				wrapper01 = $.initIscroll({
+					id: "wrapper01",
+					pullUpAction: processConfimAction,
+					pullDownAction: processConfimAction,
+					limit: 15
+				});
+				processConfimAction(wrapper01);
+			}
+			init();
+			var dataConfig = {
+				"MSG001": {
+					"name": "普通消息",
+					"code": "MSG001",
+					"type": "sm",
+					"icon": "../images/news/xtxx.png",
+					"link": "",
+					"opentype": "1",
+					"introduction": "普通消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				},
+				"MSG002": {
+					"name": "随访消息",
+					"code": "MSG002",
+					"type": "sm",
+					"icon": "../images/news/ddxx.png",
+					"link": "../set/follow_manage.html",
+					"opentype": "3",
+					"introduction": "随访消息列表，点击打开新页面",
+					"target": "pat",
+					"status": "1",
+				},
+				"MSG003": {
+					"name": "普通消息",
+					"code": "MSG003",
+					"type": "bm",
+					"icon": "../images/news/ddxx.png",
+					"link": "",
+					"opentype": "1",
+					"introduction": "普通消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				},
+				"MSG004": {
+					"name": "普通消息",
+					"code": "MSG004",
+					"type": "bm",
+					"icon": "../images/news/ddxx.png",
+					"link": "../familydoctor/jiuzhen_notice.html",
+					"opentype": "3",
+					"introduction": "就诊提醒消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				},
+				"MSG005": {
+					"name": "跳转消息",
+					"code": "MSG005",
+					"type": "bm",
+					"icon": "../images/news/ddxx.png",
+					"link": "../order/c02_order_xiangqing.html",
+					"opentype": "5",
+					"introduction": "普通消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				},
+				"MSG006": {
+					"name": "订单完成消息",
+					"code": "MSG006",
+					"type": "bm",
+					"icon": "../images/news/ddxx.png",
+					"link": "",
+					"opentype": "6",
+					"introduction": "普通消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				},
+				"MSG005S": {
+					"name": "跳转消息",
+					"code": "MSG005",
+					"type": "bm",
+					"icon": "../images/news/ddxx.png",
+					"link": "../online_answer_order/online_answer_order_xiangqing.html",
+					"opentype": "5",
+					"introduction": "普通消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				},
+				"MSG006S": {
+					"name": "订单完成消息",
+					"code": "MSG006",
+					"type": "bm",
+					"icon": "../images/news/ddxx.png",
+					"link": "",
+					"opentype": "6s",
+					"introduction": "普通消息列表，点击更改消息状态",
+					"target": "all",
+					"status": "1",
+				}
+			}
+
+			initFunction = function() {
+				processConfimAction(wrapper01);
+			}
+			loaded = function() {
+				initFunction();
+			}
+
+			//点击进入聊天列表页
+			mui(".mui-content").on("tap", "#chat", function() {
+				$("#red_dian").hide();
+				localStorage.setItem('showRed', "false");
+				
+				
+				
+				
+				mui.openWindow({
+					url: '../familydoctor/message_list.html',
+					id: 'familydoctormessage_list.html',
+					show: {
+						autoShow: false, //页面loaded事件发生后自动显示，默认为true
+						event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+					},
+					waiting: {
+						autoShow: true //自动显示等待框，默认为true
+					},
+					extras: {
+						//summary: teamInfo.summary
+					}
+				});
+			});
+
+			mui(".mui-content").on("tap", ".cus-msg-box", function() {
+				var dataId = $(this).attr("data-id");
+				var dataType = $(this).attr("data-type");
+				var extras = $(this).attr("data-ext");
+				
+				
+				//更新消息已读状态
+				var messageFlagURL=serverAddress+"/api/__DoOVES70/Od676Z8998_0/P/UNTF/"+dataId;
+				var meesageFlagsussess = function(data) {
+					console.log("====>更新状态"+JSON.stringify(data));
+				}
+				commonHttpUtils2(messageFlagURL, "post", "", meesageFlagsussess, error);
+				changeRead(dataId);
+				
+				var def = dataConfig[dataType];
+				if(def.opentype == "3") {
+					mui.openWindow({
+						url: def.link,
+						id: def.link,
+						extras: {
+							msgId: dataId,
+							extras: extras
+						},
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded'
+						},
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+						}
+					});
+				}
+				if(def.opentype == "5") {
+					mui.openWindow({
+						url: def.link,
+						id: def.link,
+						extras: {
+							ORDER_ID: extras,
+						},
+						show: {
+							autoShow: true, //页面loaded事件发生后自动显示，默认为true
+							event: 'loaded'
+						},
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+						}
+					});
+				}
+				if(def.opentype == "6") {
+					var i = plus.webview.getLaunchWebview();
+					if(i) {
+						i.evalJS("setItemActive(2,4)");
+						//mui.fire(i, 'refresh');
+					}
+					return true;
+					localStorage.setItem("upitem", 4);
+				}
+				if(def.opentype == "6s") {
+					var i = plus.webview.getLaunchWebview();
+					if(i) {
+						i.evalJS("setItemActive(2,3)");
+						//mui.fire(i, 'refresh');
+					}
+					return true;
+					localStorage.setItem("upitem", 3);
+				}
+			});
+
+			function changeRead(dataId) {
+				var div = $("[data-id='" + dataId + "']")
+				div.find(".mui-badge").hide()
+				div.find(".mui-media-body").addClass("read-color")
+				var msgFlag = JSON.parse(plus.storage.getItem('msgFlag') ? plus.storage.getItem('msgFlag') : "{}");
+				if(!msgFlag) {
+					msgFlag = {};
+				}
+				msgFlag[dataId] = "read"
+
+				delete msgFlagStr_unread[dataId];
+
+				plus.storage.setItem('msgFlag', JSON.stringify(msgFlag));
+				plus.storage.setItem("msgFlag_unread", JSON.stringify(msgFlagStr_unread));
+
+			}
+		});
+
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+
+		function comparedjson(json1, json2) {
+			//循环遍历其中一个json对象
+			for(var key in json1) {
+				if(typeof(json1[key]) != "object" || json1[key] == null) {
+					if(json2[key] != null) {
+						if(json1[key] != json2[key]) {
+							//console.log('发现不同' + key + '：' + json1[key], json2[key]);
+							delete json2[key];
+						}
+					} else {
+						//console.log('发现删除' + key + '：' + json1[key], json2[key]);
+					}
+				}
+
+			}
+		}
+
+		//		{
+		//			"result": "success",
+		//			"code": "000000",
+		//			"msg": "操作成功",
+		//			"obj": [{
+		//				"_id": "5ac2e450d3eb122edc664648",
+		//				"template": "MSG005S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "你的订单（201804021607171345）已被123456接收",
+		//				"extras": "5ac1e4b5ded50523f0ffc94c",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:17:52.857Z",
+		//				"updatedOn": "2018-04-03T02:17:52.857Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e414d3eb122edc66462f",
+		//				"template": "MSG006S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "亲爱的用户，医护因故已经取消您的订单服务(订单号:201804021607171345)，请您耐心等待其他医护接单。由此带来不便，请您谅解。",
+		//				"extras": "5ac1e4b5ded50523f0ffc94c",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:16:52.447Z",
+		//				"updatedOn": "2018-04-03T02:16:52.447Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e382d3eb122edc66461e",
+		//				"template": "MSG006S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "亲爱的用户，医护因故已经取消您的订单服务(订单号:201803301520305495)，请您耐心等待其他医护接单。由此带来不便，请您谅解。",
+		//				"extras": "5abde53e28d3213790fd3b71",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:14:26.883Z",
+		//				"updatedOn": "2018-04-03T02:14:26.883Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e360d3eb122edc66461a",
+		//				"template": "MSG005S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "你的订单（201803301520305495）已被123456接收",
+		//				"extras": "5abde53e28d3213790fd3b71",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:13:52.223Z",
+		//				"updatedOn": "2018-04-03T02:13:52.223Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e34cd3eb122edc664618",
+		//				"template": "MSG006S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "亲爱的用户，医护因故已经取消您的订单服务(订单号:201803301520305495)，请您耐心等待其他医护接单。由此带来不便，请您谅解。",
+		//				"extras": "5abde53e28d3213790fd3b71",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:13:32.250Z",
+		//				"updatedOn": "2018-04-03T02:13:32.250Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e320d3eb122edc664614",
+		//				"template": "MSG005S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "你的订单（201803301520305495）已被123456接收",
+		//				"extras": "5abde53e28d3213790fd3b71",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:12:48.273Z",
+		//				"updatedOn": "2018-04-03T02:12:48.273Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e164d3eb122edc664607",
+		//				"template": "MSG005S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "你的订单（201804021607171345）已被123456接收",
+		//				"extras": "5ac1e4b5ded50523f0ffc94c",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:05:24.614Z",
+		//				"updatedOn": "2018-04-03T02:05:24.614Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2e144d3eb122edc664603",
+		//				"template": "MSG006S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "亲爱的用户，医护因故已经取消您的订单服务(订单号:201803301520305495)，请您耐心等待其他医护接单。由此带来不便，请您谅解。",
+		//				"extras": "5abde53e28d3213790fd3b71",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T02:04:52.884Z",
+		//				"updatedOn": "2018-04-03T02:04:52.884Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2dfd3d3eb122edc6645e6",
+		//				"template": "MSG006S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "亲爱的用户，医护因故已经取消您的订单服务(订单号:201804021607171345)，请您耐心等待其他医护接单。由此带来不便，请您谅解。",
+		//				"extras": "5ac1e4b5ded50523f0ffc94c",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T01:58:43.895Z",
+		//				"updatedOn": "2018-04-03T01:58:43.895Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2df60d3eb122edc6645e2",
+		//				"template": "MSG005S",
+		//				"toId": {
+		//					"userId": "5abb228f16fe312130dca995",
+		//					"status": "0"
+		//				},
+		//				"targetType": "pat",
+		//				"title": "订单消息",
+		//				"content": "你的订单（201804021607171345）已被123456接收",
+		//				"extras": "5ac1e4b5ded50523f0ffc94c",
+		//				"src": "sys",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"createdOn": "2018-04-03T01:56:48.832Z",
+		//				"updatedOn": "2018-04-03T01:56:48.832Z",
+		//				"__v": 0
+		//			}, {
+		//				"_id": "5ac2dbda3ce2a609785b273c",
+		//				"src": "web",
+		//				"targetType": "all",
+		//				"notificType": "bm",
+		//				"status": "0",
+		//				"isshow": true,
+		//				"template": "MSG003",
+		//				"title": "测试",
+		//				"extras": "顶顶顶",
+		//				"content": "顶顶顶顶",
+		//				"toId": {
+		//					"status": "0",
+		//					"userId": "5abb228f16fe312130dca995"
+		//				},
+		//				"createdOn": "2018-04-03T01:41:46.253Z",
+		//				"updatedOn": "2018-04-03T01:41:46.253Z",
+		//				"__v": 0
+		//			}],
+		//			"sub": [{
+		//				"nrcount": 11
+		//			}]
+		//		}
+	</script>
+
+</html>

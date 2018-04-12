@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/main.css" />
+		<style>
+			#head-img {
+				width: 70px;
+				height: 70px;
+				background-size: 100% 100%;
+				display: inline-block;
+				position: relative;
+				border-radius: 50%;
+				margin-top: 0.3rem;
+			}
+			
+			#head-img-button {
+				margin-top: 0.3rem;
+				max-width: 1.54rem;
+				height: .58rem;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+				margin-right: -145px;
+			}
+			
+			#gerenzhongxin .mui-media-body {
+				font-size: 16px;
+				padding-top: 0.4rem;
+				padding-left: 10px;
+			}
+			
+			.firstUl {
+				margin-top: 0.08rem;
+			}
+			
+			.mui-navigate-right:after {
+				font-size: 0.5rem;
+				color: #E0E0E0;
+				right: 0;
+			}
+			
+			#table-viewX {
+				font-size: 0.2916rem;
+			}
+			
+			#table-viewX img {
+				width: 0.65rem;
+				height: 0.65rem;
+			}
+			
+			#table-viewX .mui-media-body {
+				margin-top: 0.15rem;
+				width: 90%;
+				float: right;
+				font-size: 15px;
+				padding-left: 10px;
+			}
+			
+			.mui-pull-right {
+				margin-right: 25px;
+			}
+			
+			.mui-btn {
+				border-radius: 0;
+				font-size: 0.3126rem;
+				color: #1d1d1d;
+			}
+			
+			.mui-content-padded {
+				margin: 0;
+			}
+			
+			.mui-table-view:before {
+				height: 1px;
+				background-color: #ececec;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn).mui-active {
+				background-color: transparent;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0;
+			}
+			
+			.tubiao {
+				width: 10%;
+				float: left;
+			}
+			
+			.wrz {
+				width: 15px;
+				height: 15px;
+				float: left;
+			}
+			
+			.mui-content>.mui-table-view:first-child{
+				margin-top: 0 !important;
+			}
+			.renzheng{
+				margin-top: 6px;
+				line-height: 1.5;
+			}
+			p{
+				font-size: 12px;
+			}
+			.displayNon{
+				display: none !important;
+			}
+			.displayBloci{
+				display: block !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron gerenzhongxin" id="gerenzhongxin">
+				<li class="mui-table-view-cell mui-media">
+					<a class="geren_message" id="geren_message">
+						<img class="mui-action-preview mui-pull-left displayNon" id="head-img" >
+						<div class="mui-media-body">
+							<img class="mui-media-object mui-pull-right displayNon " id="head-img-button" src="../images/qrz.png" >
+							<span id="geren_name"></span>
+							<div class="renzheng">
+								<img class="wrz" src="" id="renzhengIMG">
+								<p class="mui-ellipsis" id="isshiming"></p>
+								<p class="mui-ellipsis" id="hospital"></p>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view firstUl" id="table-viewX">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" id="wodeyihu">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/wdyh.png"></div>
+						<div class="mui-media-body">我的医护</div>
+					</a>
+				</li>
+			</ul>
+			
+			<ul class="mui-table-view" id="table-viewX">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="service_object">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/ffdx.png" /></div>
+						<div class="mui-media-body">
+							服务对象管理
+						</div>
+					</a>
+
+				</li>
+			</ul>
+			<ul class="mui-table-view" id="table-viewX">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="wodezhanghu">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/wdzh.png" /></div>
+						<div class="mui-media-body">
+							我的账户
+						</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view" id="table-viewX">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="yijianfankui">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/yyfk.png" /></div>
+						<div class="mui-media-body">
+							意见反馈
+						</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view" id="table-viewX">
+				<li class="mui-table-view-cell">
+					<a id="use_document" class="mui-navigate-right">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/syxx.png" /></div>
+						<div class="mui-media-body">
+							使用协议
+						</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view" id="table-viewX">
+				<li class="mui-table-view-cell">
+					<a id="Customer_service" class="mui-navigate-right">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/qskf.png" /></div>
+						<div class="mui-media-body">
+							柒拾客服
+						</div>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" id="table-viewX">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="setting">
+						<div class="tubiao"><img class="mui-media-object mui-pull-left" src="../images/wode/sz.png" /></div>
+						<div class="mui-media-body">
+							设置
+						</div>
+					</a>
+				</li>
+			</ul>
+			
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/xiangyingshi.js"></script>
+	<script type="text/javascript" src="../js/constants.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="../js/qs/qs.feedback.js"></script>
+	<script type="text/javascript" src="../js/qs/md5/md5.min.js"></script>
+	
+	<script>
+		mui.init({
+			keyEventBind: {
+				backbutton: true //打开back按键监听
+			},
+			beforeback: function() {
+				//返回true，继续页面关闭逻辑  
+				mui.back;
+				return true;
+			}
+		});
+		var id = localStorage.getItem("TOKENID");
+		var head_photo = localStorage.getItem('HEAD_PHOTO');
+		var gerenname = localStorage.getItem("GEREN_NAME");
+		var hospital = localStorage.getItem("hospital");
+		//SHIMING_TOKEN1判断本地是否实名认证，SHIMING_TOKEN判断后台是否审核成功
+		var isshiming = localStorage.getItem("SHIMING_TOKEN1");
+		var isshiminghoutai = '';
+		document.getElementById("hospital").innerText = hospital;
+		mui.plusReady(function() {
+			var sussess = function(data) {
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				if(data.result == "success") {
+					var image = data.data.patientavatar;
+					if(image != null && image != '' && (image.indexOf("client\\") == 0)) {
+						localStorage.setItem('HEAD_PHOTO', image.split("client\\")[1]);
+						document.getElementById('head-img').src = serverAddress + "/" + image.split("client\\")[1];
+						
+					}
+					if(image != null && image != '' && (image.indexOf("client\\") < 0)) {
+						localStorage.setItem('HEAD_PHOTO', image);
+						document.getElementById("head-img").src = serverAddress + "/" + image;
+					}
+					if(image != null && image != '' &&(image.indexOf("client/")==0)){
+						localStorage.setItem('HEAD_PHOTO', image.split("client/")[1]);
+						document.getElementById('head-img').src = serverAddress + "/" + image.split("client/")[1];
+					}
+					$("#head-img").removeClass("displayNon");
+					$("#head-img").addClass("displayBloci");
+					
+					var ele = document.getElementById("head-img");
+					ele.setAttribute('data-lazyload', ele.src);
+					ele.setAttribute('data-loaded', "");
+					$$.lazyload(ele);
+					//身份证号
+					var shenfencard = data.data.idnumber;
+					if(shenfencard != "") {
+						localStorage.setItem('SHENFEN_CARD', shenfencard);
+					}
+					// 姓名
+					var name = decodeURI(data.data.realname);
+					
+					if(name != "" && name != "undefined") {
+						// 个人姓名存入缓存
+						localStorage.setItem('GEREN_NAME', name);
+						document.getElementById('geren_name').innerHTML = localStorage.getItem('GEREN_NAME');
+					} else {
+						// 默认个人姓名
+						document.getElementById('geren_name').innerHTML = '佚名';
+					}
+					//所属医院
+					var hospital = decodeURI(data.hosname);
+					if(hospital != "") {
+						localStorage.setItem("Hospital", hospital);
+						document.getElementById("hospital").innerHTML = hospital;
+					}
+					//是否实名认证
+					$("#head-img-button").removeClass("displayNon");
+					isshiminghoutai = data.data.idapprove;
+					if(isshiminghoutai == "0") {
+						$("#head-img-button").css("display", "block");
+						document.getElementById("renzhengIMG").src = "../images/wode/wrz.png";
+						document.getElementById("isshiming").innerText = "未实名认证";
+					} else if(isshiminghoutai == "1") {
+						$("#head-img-button").css("display", "none");
+						document.getElementById("renzhengIMG").src = "../images/wode/wrz.png";
+						document.getElementById("isshiming").innerText = "已经实名认证,待系统审核";
+					} else if(isshiminghoutai == "2") {
+						$("#head-img-button").css("display", "none");
+						document.getElementById("renzhengIMG").src = "../images/wode/yrz.png";
+						document.getElementById("isshiming").innerText = "已认证";
+					} else if(isshiminghoutai == "3") {
+						$("#head-img-button").css("display", "block");
+						document.getElementById("renzhengIMG").src = "../images/wode/wrz.png";
+						document.getElementById("isshiming").innerText = "未通过实名认证";
+					}
+				}
+			};
+			var url = serverAddress + "/api/patient/getmyinfo/" + id;
+			if(id){
+				commonHttpUtils(url, "get", {}, sussess, error, true);
+			}
+		});
+
+		document.getElementById("head-img").addEventListener('tap', function() {
+			// 从缓存中读取个人信息，并将缓存信息传递给个人信息页面
+			var head_photo = localStorage.getItem('HEAD_PHOTO') == null ? "" : localStorage.getItem('HEAD_PHOTO');
+			mui.openWindow({
+				url: '../geren_message/d02_geren_messageTouxiang.html',
+				id: 'd02_geren_messageTouxiang.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+
+			var geren_message = plus.webview.getWebviewById('d02_geren_messageTouxiang.html');
+			geren_message.addEventListener('loaded', function() {
+				mui.fire(geren_message, "geren_message", {
+					HEAD_PHOTO: head_photo,
+				});
+			});
+		});
+		//去认证按钮
+		document.getElementById("head-img-button").addEventListener("tap", function(e) {
+			mui.openWindow({
+				url: '../geren_message/d02_geren_message.html',
+				id: 'd02_geren_message.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		document.getElementById("setting").addEventListener("tap", function(e) {
+			mui.openWindow({
+				url: '../geren_message/setting.html',
+				id: 'setting.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		})
+		document.getElementById("wodeyihu").addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../geren_message/d03_wodeyihu.html',
+				id: 'd03_wodeyihu.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		document.getElementById("yijianfankui").addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../geren_message/e03_suggestion.html',
+				id: 'e03_suggestion.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		document.getElementById("wodezhanghu").addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../geren_message/d07_my_account.html',
+				id: 'd07_my_account.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		document.getElementById("use_document").addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../document/e03_insurance_agreement.html',
+				id: 'e03_insurance_agreement.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		document.getElementById("Customer_service").addEventListener("tap", function() {
+			mui.openWindow({
+				url: '../geren_message/qskf.html',
+				id: 'qskf.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				}
+			});
+		});
+		document.getElementById("service_object").addEventListener("tap", function(e) {
+			mui.openWindow({
+				url: '../service_object/a045_service_object_query.html',
+				id: 'a045_service_object_query.html',
+				show: {
+					autoShow: false, //页面loaded事件发生后自动显示，默认为true
+					event: 'loaded' //页面显示时机，默认为titleUpdate事件时显示
+				},
+				waiting: {
+					autoShow: true //自动显示等待框，默认为true
+				},
+				extras: {
+					service_object_biaoshi: 'wode'
+				}
+			});
+		});
+		
+		window.addEventListener('refresh', function(e) {
+			var head_photo = e.detail.HEAD_PHOTO;
+			location.reload();
+		});
+	</script>
+
+</html>
