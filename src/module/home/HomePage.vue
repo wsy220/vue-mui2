@@ -1,18 +1,41 @@
 <template>
   <div id="homePage">
-  <header class="mui-bar mui-bar-nav">
-    <!--<a class="mui-action-menu mui-icon mui-icon-bars mui-pull-left"></a>-->
-    <h1 id="title" class="mui-title">首页</h1>
-    <!--<a class="mui-icon mui-pull-right" id="loginBth"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>-->
-  </header>
+    <header class="mui-bar mui-bar-nav">
+      <!--<a class="mui-action-menu mui-icon mui-icon-bars mui-pull-left"></a>-->
+      <h1 id="title" class="mui-title">首页</h1>
+      <!--<a class="mui-icon mui-pull-right" id="loginBth"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>-->
+    </header>
 
 
-
-
-    <div id="lunbo" style="height: 0.2rem;">
-    </div>
-
-    <div class="mui-content">
+    <div class="mui-content" style="margin-top: 45px">
+      <div id="slider" class="mui-slider">
+        <span class="mui-badge mui-badge-huise">广告</span>
+        <div class="mui-slider-group mui-slider-loop" id="lunbo">
+          <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#">
+              <img class="qs-img-lazyload" src="./images/banner2.png" data-lazyload="./images/banner2.png">
+            </a>
+          </div>
+          <div class="mui-slider-item" data-ext="3">
+            <a href="#">
+              <img class="qs-img-lazyload" src="./images/banner3.png" data-lazyload="./images/banner3.png" >
+            </a>
+          </div>
+          <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#">
+              <img class="qs-img-lazyload" src="./images/banner4.png" data-lazyload="./images/banner4.png">
+            </a>
+          </div>
+          <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#">
+              <img class="qs-img-lazyload" src="./images/banner4.png" data-lazyload="./images/banner4.png">
+            </a>
+          </div>
+        </div>
+        <div class="mui-slider-indicator">
+          <div class="mui-indicator"></div>
+        </div>
+      </div>
       <div class="anniu">
         <div class="lefttop1" id="item1_huli">
           <span class="mui-icon"><img src="./images/logo.png"></span>
@@ -24,7 +47,7 @@
         </div>
         <div class="righttop1" id="wode_healthness">
           <span class="mui-icon"><img src="./images/logo.png"></span>
-          <!--<div class="mui-media-body">我的化验单</div>-->
+
           <div class="mui-media-body">健康数据</div>
         </div>
         <div class="center2" id="item2_zonghe"><span class="mui-icon"><img src="./images/logo.png"></span>
@@ -37,12 +60,12 @@
           <div class="mui-media-body">上门康复</div>
         </div>
         <div class="righttop2" id="familydoctor"><span class="mui-icon"><img src="./images/logo.png"></span>
-          <!--<div class="mui-media-body">我的健康</div>-->
           <div class="mui-media-body">家庭医生</div>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -50,8 +73,7 @@
     name: "hello-world",
     data(){
       return {
-        msg:'Hello World!',
-        logo: './static/images/index_img/smhl.png'
+        msg:'Hello World!'
       }
     }
   }
@@ -91,7 +113,7 @@
   }
 
   .mui-table-view-cell.mui-active,
-  .mui-table-view-cell>a:not(.mui-btn).mui-active {
+  .mui-table-view-cell > a:not(.mui-btn).mui-active {
     background-color: #FFFFFF;
   }
 
@@ -99,8 +121,8 @@
     left: 0;
   }
 
-  .mui-table-view-cell.mui-collapse .mui-collapse-content>.mui-input-group,
-  .mui-table-view-cell.mui-collapse .mui-collapse-content>.mui-slider {
+  .mui-table-view-cell.mui-collapse .mui-collapse-content > .mui-input-group,
+  .mui-table-view-cell.mui-collapse .mui-collapse-content > .mui-slider {
     margin: 0px -15px;
   }
 
@@ -299,7 +321,8 @@
   .displayYes {
     display: block;
   }
-  .mui-media-body{
+
+  .mui-media-body {
     font-size: 12px;
     margin-top: 0.05rem;
     margin-left: 0.1rem;
