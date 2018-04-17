@@ -30,6 +30,7 @@ module.exports = {
       'components': path.resolve(__dirname, '../src/components'),
       // 2. 定义别名和插件位置
       //"mui": path.resolve(__dirname, '../static/mui/cus.win.js')
+      'jquery': 'jquery'
     }
   },
   resolveLoader: {
@@ -77,6 +78,12 @@ module.exports = {
   //     filename: './static/mui/cus.win.js'
   //   })
   // ],
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
+  ],
   vue: {
     loaders: utils.cssLoaders({
       sourceMap: useCssSourceMap

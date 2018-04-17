@@ -11,7 +11,7 @@ new Vue({
     var showMenu = false, mode = 'main-move';
     //mui初始化
     mui.init();
-   // var subpages = ['tab-webview-subpage-home.html', 'tab-webview-subpage-service.html', 'tab-webview-subpage-order.html', 'tab-webview-subpage-talk.html', 'tab-webview-subpage-my.html'];
+   // var subpages = ['tab-webview-subpage-home1.html', 'tab-webview-subpage-service.html', 'tab-webview-subpage-order.html', 'tab-webview-subpage-talk.html', 'tab-webview-subpage-my.html'];
 
     var subpages = ['home.html', 'teaching.html', 'contact.html', 'news.html', 'my.html'];
     var subpage_style = {
@@ -40,18 +40,18 @@ new Vue({
       main = plus.webview.currentWebview();
 
       //setTimeout的目的是等待窗体动画结束后，再执行create webview操作，避免资源竞争，导致窗口动画不流畅；
-      setTimeout(function () {
-        //侧滑菜单默认隐藏，这样可以节省内存；
-        menu = mui.preload({
-          id: 'subpage/leftmenu.html',
-          url: 'subpage/leftmenu.html',
-          styles: {
-            left: 0,
-            width: '80%',
-            zindex: 9997
-          }
-        });
-      }, 300);
+      // setTimeout(function () {
+      //   //侧滑菜单默认隐藏，这样可以节省内存；
+      //   menu = mui.preload({
+      //     id: 'subpage/leftmenu.html',
+      //     url: 'subpage/leftmenu.html',
+      //     styles: {
+      //       left: 0,
+      //       width: '80%',
+      //       zindex: 9997
+      //     }
+      //   });
+      // }, 300);
     });
     //当前激活选项
     var activeTab = subpages[0];

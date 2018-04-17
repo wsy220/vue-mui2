@@ -1,3 +1,4 @@
+
 <template>
   <div id="teachingApp">
     <header class="mui-bar mui-bar-nav">
@@ -19,6 +20,11 @@
             {{tobo.text}}
           </li>
         </ol>
+
+        <ol>
+          <!-- 创建一个 todo-item 组件的实例 -->
+          <todo-item></todo-item>
+        </ol>
       </div>
     </div>
   </div>
@@ -26,6 +32,7 @@
 </template>
 
 <script>
+
 
   export default {
     data() {
@@ -42,19 +49,15 @@
     },
     methods: {
       reverseMessage: function () {
-        alert(3333);
         this.message = this.message.split('').reverse().join('')
+      }
+    },
+    component:{
+      'todo-item':{
+          template: '<li>这是一个 todo 项</li>'
       }
     }
   }
-
-  // var teachingApp = new Vue({
-  //   el: '#teachingApp',
-  //   data: {
-  //     seen: true
-  //   }
-  // })
-
 </script>
 
 <style>
