@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import TeachingApp from './TeachingApp'
+import axios from 'axios'
+import qs from 'qs'
+Vue.prototype.$http = axios
 //import demo from './ajax_DEMO'
 
 /* eslint-disable no-new */

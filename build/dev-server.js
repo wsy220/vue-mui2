@@ -1,9 +1,11 @@
 var config = require('../config')
 if (!process.env.NODE_ENV) process.env.NODE_ENV = config.dev.env
+
+
+var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
@@ -69,3 +71,14 @@ module.exports = app.listen(port, function (err) {
   console.log('Listening at ' + uri + '\n')
   opn(uri)
 })
+
+
+
+var app = express()  //  从这后面开始加
+
+var goodsData = require('../static/api.json')
+var router = express.Router()
+router.get("/goods", function (req,res) {
+  res.json(goodsData)
+})
+app.use(router)
