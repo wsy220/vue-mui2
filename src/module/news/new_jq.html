@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>news_jq</title>
+  <style>
+
+    .container {
+      width: 40%;
+      margin: 20px auto 0px auto;
+    }
+
+    .removed {
+      color: gray;
+    }
+
+    .removed label {
+      text-decoration: line-through;
+    }
+
+    ul li {
+      list-style-type: none;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>My Shopping List</h2>
+  <div class="input-group">
+    <input placeholder="add shopping list item" type="text" class="js-new-item form-control">
+    <span class="input-group-btn">
+      <button @click="addItem" class="js-add btn btn-default" type="button">Add!</button>
+    </span>
+  </div>
+  <ul>
+    <li>
+      <div class="checkbox">
+        <label>
+          <input class="js-item" name="list" type="checkbox"> Carrot
+        </label>
+      </div>
+    </li>
+    <li>
+      <div class="checkbox">
+        <label>
+          <input class="js-item" name="list" type="checkbox"> Book
+        </label>
+      </div>
+    </li>
+    <li class="removed">
+      <div class="checkbox">
+        <label>
+          <input class="js-item" name="list" type="checkbox" checked> Gift for aunt's birthday
+        </label>
+      </div>
+    </li>
+  </ul>
+</div>
+<script src="../static/mui/JS/jquery-3.1.1.js"></script>
+<script>
+
+  document.ready(function () {
+    /**
+     * Add button click handler
+     */
+    function onAdd() {
+      var $ul, li, $li, $label, $div, value;
+
+      value = $('.js-new-item').val();
+      //validate against empty values
+      if (value === '') {
+        return;
+      }
+      $ul = $('ul');
+      $li = $('<li>').appendTo($ul);
+      $div = $('<div>')
+        .addClass('checkbox')
+        .appendTo($li);
+      $label = $('<label>').appendTo($div);
+      $('<input>')
+        .attr('type', 'checkbox')
+        .addClass('item')
+        .attr('name', 'list')
+        .click(toggleRemoved)
+        .appendTo($label);
+      $label
+        .append(value);
+      $('.js-new-item').val('');
+    }
+
+    /**
+     * Checkbox click handler - toggles class removed on li parent element
+     * @param ev
+     */
+    function toggleRemoved(ev) {
+      var $el;
+
+      $el = $(ev.currentTarget);
+      $el.closest('li').toggleClass('removed');
+    }
+
+    $('.js-add').click(onAdd);
+    $('.js-item').click(toggleRemoved);
+  });
+</script>
+</body>
+</html>
