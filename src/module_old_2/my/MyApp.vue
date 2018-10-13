@@ -1,7 +1,7 @@
 <template>
   <div id="myApp">
     <header id="header" class="mui-bar mui-bar-transparent" style="background-color: rgba(5, 166, 240,0);">
-      <h1 class="mui-title">我</h1>
+      <h1 class="mui-title">我的</h1>
     </header>
     <div class="mui-content">
       <div class="content-head-background">

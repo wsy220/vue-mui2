@@ -1,14 +1,9 @@
-import Vue from 'vue';
-import HomePage from './HomePage';
-import vuex from 'vuex';
-import vueresorce from 'vue-resource';
+import Vue from 'vue'
+import HomePage from './HomePage'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#homePage',
   template: '<HomePage/>',
-  components: { HomePage },
-  data:{
-    message:'Hello Vue'
-  }
+  components: { HomePage }
 })
-
